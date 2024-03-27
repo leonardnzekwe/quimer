@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Dashboard() {
   return (
     <>
@@ -78,29 +79,29 @@ export default function Dashboard() {
     <div className="flex mr-12 mt-12">
     <div className="relative ml-96 border">
       <img src="/abstract.jpg" alt="abstractImage"/>
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to English</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold hover:text-cyan-300">Introduction to English</Link>
     </div>
     <div className="relative ml-96 border">
       <img src="/abstract.jpg" alt="abstractImage" />
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to Mathematics</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold text-justify hover:text-cyan-300">Introduction to Mathematics</Link>
     </div>
     <div className="relative ml-96 border">
       <img src="/abstract.jpg" alt="abstractImage" />
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to Physics</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold hover:text-cyan-300">Introduction to Physics</Link>
     </div>
     </div>
     <div className="flex mt-10 mr-12">
     <div className="relative ml-96 border size-full">
       <img src="/abstract.jpg" alt="abstractImage" />
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to Commerce</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold hover:text-cyan-300">Introduction to Commerce</Link>
     </div>
     <div className="relative ml-96 border size-full">
       <img src="/abstract.jpg" alt="abstractImage" />
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to Economics</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold hover:text-cyan-300">Introduction to Economics</Link>
     </div>
     <div className="relative ml-96 border size-full">
       <img src="/abstract.jpg" alt="abstractImage" />
-      <h2 className=" text-cyan-800 font-bold text-center">Introduction to Biology</h2>
+      <Link href="/quiz" className=" text-cyan-800 font-bold hover:text-cyan-300">Introduction to Biology</Link>
     </div>
     </div>
     </>  
