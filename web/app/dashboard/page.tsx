@@ -73,8 +73,8 @@ export default function Dashboard() {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
         </button>
-        <h1 className=" text-cyan-800 text-xl"> Hey Olanike, </h1>
-        <h2 className=" text-cyan-800 text-3xl"> You've got 89 Points! </h2>
+        <h1 className=" text-cyan-800 text-xl mb-px"> Hey Olanike, </h1>
+        <h2 className=" text-cyan-800 text-3xl mt-2"> You've got 89 Points! </h2>
       </div>
     <div className="flex mr-12 mt-12">
     <div className="relative ml-96 border">
