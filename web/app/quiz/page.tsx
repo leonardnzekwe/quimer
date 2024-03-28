@@ -36,6 +36,7 @@ const Quiz = () => {
         </div>
         <div  className='flex justify-between text-cyan-800 text-2xl m-14'>
             <button className='border rounded-lg py-2 px-6 hover:bg-cyan-500'>Previous</button>
+            <button className='border rounded-lg py-2 px-6 hover:bg-cyan-500 text-2xl text-cyan-800 align-center'>Submit</button>
             <button className='border rounded-lg py-2 px-6 hover:bg-cyan-500'>Next</button>
         </div>
     </div>
