@@ -1,9 +1,20 @@
 import graphene
-from django.db.models import Q
-from api.models import Subject, Topic, Test, Question, Answer, Session, UserResponse
+from api.models import (
+    Issuer,
+    IssuedYear,
+    Subject,
+    Topic,
+    Test,
+    Question,
+    Answer,
+    Session,
+    UserResponse,
+)
 from django.contrib.auth.models import User
 from .types import (
     UserType,
+    IssuerType,
+    IssuedYearType,
     SubjectType,
     TopicType,
     TestType,
@@ -14,6 +25,8 @@ from .types import (
 )
 from .inputs import (
     UserInput,
+    IssuerInput,
+    IssuedYearInput,
     SubjectInput,
     TopicInput,
     TestInput,
@@ -82,6 +95,102 @@ class DeleteUser(graphene.Mutation):
         if user_instance:
             user_instance.delete()
             return DeleteUser(user=None)
+        return None
+
+
+# Issuer mutation classes
+class CreateIssuer(graphene.Mutation):
+    class Arguments:
+        input = IssuerInput(required=True)
+
+    issuer = graphene.Field(IssuerType)
+
+    @staticmethod
+    def mutate(root, info, input):
+        issuer_instance = Issuer(name=input.name, description=input.description)
+        issuer_instance.save()
+        return CreateIssuer(issuer=issuer_instance)
+
+
+class UpdateIssuer(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+        input = IssuerInput(required=True)
+
+    issuer = graphene.Field(IssuerType)
+
+    @staticmethod
+    def mutate(root, info, id, input):
+        issuer_instance = Issuer.objects.get(pk=id)
+        if issuer_instance:
+            if input.name:
+                issuer_instance.name = input.name
+            if input.description:
+                issuer_instance.description = input.description
+            issuer_instance.save()
+            return UpdateIssuer(issuer=issuer_instance)
+        return UpdateIssuer(issuer=None)
+
+
+class DeleteIssuer(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    issuer = graphene.Field(IssuerType)
+
+    @staticmethod
+    def mutate(root, info, id):
+        issuer_instance = Issuer.objects.get(pk=id)
+        if issuer_instance:
+            issuer_instance.delete()
+            return DeleteIssuer(issuer=None)
+        return None
+
+
+# IssuedYear mutation classes
+class CreateIssuedYear(graphene.Mutation):
+    class Arguments:
+        input = IssuedYearInput(required=True)
+
+    issued_year = graphene.Field(IssuedYearType)
+
+    @staticmethod
+    def mutate(root, info, input):
+        issued_year_instance = IssuedYear(year=input.year)
+        issued_year_instance.save()
+        return CreateIssuedYear(issued_year=issued_year_instance)
+
+
+class UpdateIssuedYear(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+        input = IssuedYearInput(required=True)
+
+    issued_year = graphene.Field(IssuedYearType)
+
+    @staticmethod
+    def mutate(root, info, id, input):
+        issued_year_instance = IssuedYear.objects.get(pk=id)
+        if issued_year_instance:
+            if input.year:
+                issued_year_instance.year = input.year
+            issued_year_instance.save()
+            return UpdateIssuedYear(issued_year=issued_year_instance)
+        return UpdateIssuedYear(issued_year=None)
+
+
+class DeleteIssuedYear(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    issued_year = graphene.Field(IssuedYearType)
+
+    @staticmethod
+    def mutate(root, info, id):
+        issued_year_instance = IssuedYear.objects.get(pk=id)
+        if issued_year_instance:
+            issued_year_instance.delete()
+            return DeleteIssuedYear(issued_year=None)
         return None
 
 
@@ -192,10 +301,9 @@ class CreateTest(graphene.Mutation):
             title=input.title,
             description=input.description,
             subject_id=input.subject_id,
-            random_questions_count=input.random_questions_count,
         )
         test_instance.save()
-        test_instance.topics.set(input.topics)
+        test_instance.questions.set(input.question_ids)
         test_instance.save()
         return CreateTest(test=test_instance)
 
@@ -217,10 +325,8 @@ class UpdateTest(graphene.Mutation):
                 test_instance.description = input.description
             if input.subject_id:
                 test_instance.subject_id = input.subject_id
-            if input.random_questions_count:
-                test_instance.random_questions_count = input.random_questions_count
-            if input.topics:
-                test_instance.topics.set(input.topics)
+            if input.question_ids:
+                test_instance.questions.set(input.question_ids)
             test_instance.save()
             return UpdateTest(test=test_instance)
         return UpdateTest(test=None)
@@ -253,10 +359,13 @@ class CreateQuestion(graphene.Mutation):
         question_instance = Question(
             text=input.text,
             subject_id=input.subject_id,
+            topic_id=input.topic_id,
+            issuer_id=input.issuer_id,
+            issuer_year_id=input.issuer_year_id,
             difficulty=input.difficulty,
         )
         question_instance.save()
-        question_instance.topics.set(input.topics)
+        question_instance.answers.set(input.answer_ids)
         question_instance.save()
         return CreateQuestion(question=question_instance)
 
@@ -274,12 +383,18 @@ class UpdateQuestion(graphene.Mutation):
         if question_instance:
             if input.text:
                 question_instance.text = input.text
+            if input.answer_ids:
+                question_instance.answers.set(input.answer_ids)
             if input.subject_id:
                 question_instance.subject_id = input.subject_id
+            if input.topic_id:
+                question_instance.topic_id = input.topic_id
+            if input.issuer_id:
+                question_instance.issuer_id = input.issuer_id
+            if input.issuer_year_id:
+                question_instance.issuer_year_id = input.issuer_year_id
             if input.difficulty:
                 question_instance.difficulty = input.difficulty
-            if input.topics:
-                question_instance.topics.set(input.topics)
             question_instance.save()
             return UpdateQuestion(question=question_instance)
         return UpdateQuestion(question=None)
@@ -310,7 +425,6 @@ class CreateAnswer(graphene.Mutation):
     @staticmethod
     def mutate(root, info, input):
         answer_instance = Answer(
-            question_id=input.question_id,
             text=input.text,
             is_correct=input.is_correct,
         )
@@ -329,8 +443,6 @@ class UpdateAnswer(graphene.Mutation):
     def mutate(root, info, id, input):
         answer_instance = Answer.objects.get(pk=id)
         if answer_instance:
-            if input.question_id:
-                answer_instance.question_id = input.question_id
             if input.text:
                 answer_instance.text = input.text
             if input.is_correct is not None:

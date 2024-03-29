@@ -1,14 +1,11 @@
 # signals.py
 
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Session
+from .models import UserResponse
 
 
-@receiver(post_save, sender=Session)
+@receiver(post_save, sender=UserResponse)
 def calculate_session_score(sender, instance, created, **kwargs):
-    """
-    Signal to calculate session score after saving a Session instance.
-    """
-    if created:
-        instance.calculate_score()
+    """Signal handler to calculate the score of a session after a UserResponse object is created or updated."""
+    instance.session.calculate_score()

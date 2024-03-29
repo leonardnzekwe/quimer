@@ -4,6 +4,12 @@ from .mutations import (
     CreateUser,
     UpdateUser,
     DeleteUser,
+    CreateIssuer,
+    UpdateIssuer,
+    DeleteIssuer,
+    CreateIssuedYear,
+    UpdateIssuedYear,
+    DeleteIssuedYear,
     CreateSubject,
     UpdateSubject,
     DeleteSubject,
@@ -28,6 +34,8 @@ from .mutations import (
 )
 from .types import (
     UserType,
+    IssuerType,
+    IssuedYearType,
     SubjectType,
     TopicType,
     TestType,
@@ -38,6 +46,8 @@ from .types import (
 )
 from api.models import (
     User,
+    Issuer,
+    IssuedYear,
     Subject,
     Topic,
     Test,
@@ -54,6 +64,16 @@ class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
     update_user = UpdateUser.Field()
     delete_user = DeleteUser.Field()
+
+    # Issuer mutations
+    create_issuer = CreateIssuer.Field()
+    update_issuer = UpdateIssuer.Field()
+    delete_issuer = DeleteIssuer.Field()
+
+    # IssuedYear mutations
+    create_issued_year = CreateIssuedYear.Field()
+    update_issued_year = UpdateIssuedYear.Field()
+    delete_issued_year = DeleteIssuedYear.Field()
 
     # Subject mutations
     create_subject = CreateSubject.Field()
@@ -94,6 +114,20 @@ class Mutation(graphene.ObjectType):
 class Query(graphene.ObjectType):
     users = graphene.List(
         UserType,
+        id=graphene.Int(),
+        first=graphene.Int(),
+        last=graphene.Int(),
+        search=graphene.String(),
+    )
+    issuers = graphene.List(
+        IssuerType,
+        id=graphene.Int(),
+        first=graphene.Int(),
+        last=graphene.Int(),
+        search=graphene.String(),
+    )
+    issued_years = graphene.List(
+        IssuedYearType,
         id=graphene.Int(),
         first=graphene.Int(),
         last=graphene.Int(),
@@ -170,6 +204,46 @@ class Query(graphene.ObjectType):
             users = users[start_index:]
 
         return users
+
+    def resolve_issuers(
+        self, info, id=None, first=None, last=None, search=None, **kwargs
+    ):
+        issuers = Issuer.objects.all()
+
+        if id:
+            issuers = issuers.filter(id=id)
+
+        if search:
+            issuers = issuers.filter(name__icontains=search)
+
+        if first:
+            issuers = issuers[:first]
+        elif last:
+            total_count = issuers.count()
+            start_index = max(total_count - last, 0)
+            issuers = issuers[start_index:]
+
+        return issuers
+
+    def resolve_issued_years(
+        self, info, id=None, first=None, last=None, search=None, **kwargs
+    ):
+        issued_years = IssuedYear.objects.all()
+
+        if id:
+            issued_years = issued_years.filter(id=id)
+
+        if search:
+            issued_years = issued_years.filter(year__icontains=search)
+
+        if first:
+            issued_years = issued_years[:first]
+        elif last:
+            total_count = issued_years.count()
+            start_index = max(total_count - last, 0)
+            issued_years = issued_years[start_index:]
+
+        return issued_years
 
     def resolve_subjects(
         self, info, id=None, first=None, last=None, search=None, **kwargs
