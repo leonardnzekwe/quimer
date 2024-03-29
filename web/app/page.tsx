@@ -1,4 +1,4 @@
-import image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import Dashboard from "./dashboard/page";
 
@@ -27,7 +27,7 @@ export default function Home() {
           <button className="border-6 rounded bg-cyan-800 hover:bg-cyan-500 text-white font-bold py-2 px-6">Sign Up</button>
         </div>
       </div>
-      <img src="/man.jpeg" alt="ManImage" width={700} height={500}/>
+      <Image src="/man.jpeg" alt="ManImage" width={700} height={500} />
       </div>
     </main>
   );
