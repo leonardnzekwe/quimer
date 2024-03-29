@@ -1,13 +1,34 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-from api.models import Subject, Topic, Test, Question, Answer, Session, UserResponse
+from api.models import (
+    Issuer,
+    IssuedYear,
+    Subject,
+    Topic,
+    Test,
+    Question,
+    Answer,
+    Session,
+    UserResponse,
+)
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 class UserType(DjangoObjectType):
     class Meta:
         model = User
+        fields = "__all__"
+
+
+class IssuerType(DjangoObjectType):
+    class Meta:
+        model = Issuer
+        fields = "__all__"
+
+
+class IssuedYearType(DjangoObjectType):
+    class Meta:
+        model = IssuedYear
         fields = "__all__"
 
 
@@ -42,9 +63,14 @@ class AnswerType(DjangoObjectType):
 
 
 class SessionType(DjangoObjectType):
+    is_expired = graphene.Boolean()
+
     class Meta:
         model = Session
         fields = "__all__"
+
+    def resolve_is_expired(self, info):
+        return self.is_expired()
 
 
 class UserResponseType(DjangoObjectType):

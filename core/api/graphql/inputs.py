@@ -10,6 +10,17 @@ class UserInput(graphene.InputObjectType):
     password = graphene.String()
 
 
+class IssuerInput(graphene.InputObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    description = graphene.String(optional=True)
+
+
+class IssuedYearInput(graphene.InputObjectType):
+    id = graphene.ID()
+    year = graphene.Int()
+
+
 class SubjectInput(graphene.InputObjectType):
     id = graphene.ID()
     name = graphene.String()
@@ -23,25 +34,26 @@ class TopicInput(graphene.InputObjectType):
 class TestInput(graphene.InputObjectType):
     id = graphene.ID()
     title = graphene.String()
-    description = graphene.String()
+    description = graphene.String(optional=True)
     subject_id = graphene.ID()
-    topic_ids = graphene.List(graphene.ID)
-    random_questions_count = graphene.Int()
+    question_ids = graphene.List(graphene.ID)
 
 
 class QuestionInput(graphene.InputObjectType):
     id = graphene.ID()
     text = graphene.String()
+    answer_ids = graphene.List(graphene.ID)
     subject_id = graphene.ID()
-    topic_ids = graphene.List(graphene.ID)
-    difficulty = graphene.String()
+    topic_id = graphene.ID()
+    issuer_id = graphene.ID()
+    issuer_year_id = graphene.ID()
+    difficulty = graphene.String(choices=["Easy", "Medium", "Hard"])
 
 
 class AnswerInput(graphene.InputObjectType):
     id = graphene.ID()
-    question_id = graphene.ID()
     text = graphene.String()
-    is_correct = graphene.Boolean()
+    is_correct = graphene.Boolean(default_value=False)
 
 
 class SessionInput(graphene.InputObjectType):
@@ -49,9 +61,9 @@ class SessionInput(graphene.InputObjectType):
     user_id = graphene.ID()
     test_id = graphene.ID()
     start_time = graphene.String()
-    end_time = graphene.String()
-    time_limit = graphene.Int()
-    score = graphene.Float()
+    end_time = graphene.String(optional=True)
+    time_limit = graphene.Int(optional=True)
+    score = graphene.Float(optional=True)
 
 
 class UserResponseInput(graphene.InputObjectType):
