@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from api.views import (
+    IssuerViewSet,
     SubjectViewSet,
     TopicViewSet,
     TestViewSet,
@@ -20,6 +21,7 @@ from dj_rest_auth.jwt_auth import get_refresh_view
 
 # Create a router and register viewsets with it
 router = DefaultRouter()
+router.register(r"issuers", IssuerViewSet)
 router.register(r"subjects", SubjectViewSet)
 router.register(r"topics", TopicViewSet)
 router.register(r"tests", TestViewSet)
