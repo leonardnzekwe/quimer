@@ -50,12 +50,7 @@ class TestAdmin(admin.ModelAdmin):
     """Custom admin panel settings for the Test model."""
 
     list_display = ("title", "date_created", "subject", "description")
-    search_fields = (
-        "title",
-        "subject__name",
-        "description",
-        "date_created"
-    )
+    search_fields = ("title", "subject__name", "description", "date_created")
     list_filter = ("date_created", "subject")
 
 
@@ -64,7 +59,14 @@ class QuestionAdmin(admin.ModelAdmin):
     """Custom admin panel settings for the Question model."""
 
     list_display = ("text", "subject", "topic", "issuer", "issued_year", "difficulty")
-    search_fields = ("text", "subject__name", "topic__name", "issuer__name", "issued_year__year", "difficulty")
+    search_fields = (
+        "text",
+        "subject__name",
+        "topic__name",
+        "issuer__name",
+        "issued_year__year",
+        "difficulty",
+    )
     list_filter = ("subject", "difficulty")
 
 

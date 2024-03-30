@@ -1,6 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from api.views import (
+    APILoginView,
+    UserViewSet,
     IssuerViewSet,
     SubjectViewSet,
     TopicViewSet,
@@ -11,7 +13,6 @@ from api.views import (
     UserResponseViewSet,
 )
 from dj_rest_auth.views import (
-    LoginView,
     LogoutView,
     UserDetailsView,
     PasswordChangeView,
@@ -21,6 +22,7 @@ from dj_rest_auth.jwt_auth import get_refresh_view
 
 # Create a router and register viewsets with it
 router = DefaultRouter()
+router.register(r"users", UserViewSet)
 router.register(r"issuers", IssuerViewSet)
 router.register(r"subjects", SubjectViewSet)
 router.register(r"topics", TopicViewSet)
@@ -35,7 +37,7 @@ urlpatterns = [
     # API URL Routes
     path("", include(router.urls)),
     # API Auth Views
-    path("auth/login/", LoginView.as_view(), name="auth_login"),
+    path("auth/login/", APILoginView.as_view(), name="auth_login"),
     path("auth/logout/", LogoutView.as_view(), name="auth_logout"),
     path("auth/user/", UserDetailsView.as_view(), name="rest_user_details"),
     path(
