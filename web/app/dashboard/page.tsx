@@ -39,7 +39,8 @@ export default function Dashboard() {
   // If there is an error, display the error message
   if (error) {
     console.error("Error fetching user dashboard data:", error);
-    return <div>Error fetching data</div>;
+    router.push('/auth/error');
+    return null; // return null whilst routing
   }
 
   // Function to toggle section visibility and set others to false
@@ -120,7 +121,7 @@ export default function Dashboard() {
           {/* Body Section For the Conditional Rendering */}
           <div className="flex-1 p-4">
             {/* Display user's Session Test scores */}
-            {showSessions && data.users ? (
+            {showSessions && data.users && data.users.length > 0 && data.users[0].sessionSet && data.users[0].sessionSet.length > 0 ? (
               <div className="flex flex-col items-center mt-10">
                 <p className="capitalize text-center text-lg mb-4">Session Test Scores:</p>
                 <div className=" bg-neutral-900 rounded-lg w-fit p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -143,7 +144,7 @@ export default function Dashboard() {
               </div>
             ) : null}
 
-            {/* Display user's Issuers */}
+            {/* Display Issuers */}
             {showIssuers && data.issuers && data.issuers.length > 0 ? (
               <div className="flex flex-col items-center mt-10">
                 <p className="capitalize text-center text-lg mb-4">Registered Issuers:</p>
@@ -180,7 +181,7 @@ export default function Dashboard() {
               </div>
             ) : null}
 
-            {/* Display user's Tests */}
+            {/* Display Tests */}
             {showTests && data.tests && data.tests.length > 0 ? (
               <div className="flex flex-col items-center mt-10">
                 <p className="capitalize text-center text-lg mb-4">Available Tests:</p>
@@ -202,7 +203,6 @@ export default function Dashboard() {
             ) : null}
 
           </div>
-
         </div>
       </div>
     );
