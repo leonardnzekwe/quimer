@@ -33,6 +33,7 @@ export default function Dashboard() {
 
   // Loading state
   if (status === "loading" || loading) {
+  if (status === "loading" || loading) {
     return <DashboardLoader />; // Render dashboard skeleton loader while loading
   }
 
