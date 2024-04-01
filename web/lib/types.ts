@@ -22,7 +22,7 @@ export interface Topic {
 export interface Test {
   id: number;
   title: string;
-  date_created: string; // This should be a string representing a date-time format
+  dateCreated: string; // This should be a string representing a date-time format
   description: string | null;
   subject: Subject;
   questions: Question[];
@@ -49,9 +49,9 @@ export interface Session {
   id: number;
   user: User;
   test: Test;
-  start_time: string; // This should be a string representing a date-time format
-  end_time: string | null; // This should be a string representing a date-time format or null
-  time_limit: number;
+  startTime: string; // This should be a string representing a date-time format
+  endTime: string | null; // This should be a string representing a date-time format or null
+  timeLimit: number;
   score: number;
 }
 

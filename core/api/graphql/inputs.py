@@ -1,3 +1,4 @@
+from datetime import datetime
 import graphene
 
 
@@ -60,10 +61,10 @@ class SessionInput(graphene.InputObjectType):
     id = graphene.ID()
     user_id = graphene.ID()
     test_id = graphene.ID()
-    start_time = graphene.String(optional=True)
-    end_time = graphene.String(optional=True)
-    time_limit = graphene.Int(optional=True)
-    score = graphene.Float(optional=True)
+    start_time = graphene.DateTime(default_value=datetime.now())
+    end_time = graphene.DateTime(optional=True, null=True)
+    time_limit = graphene.Int(default_value=2)
+    score = graphene.Float(default_value=0.0)
 
 
 class UserResponseInput(graphene.InputObjectType):
