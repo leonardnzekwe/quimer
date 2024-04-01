@@ -60,7 +60,7 @@ class SessionInput(graphene.InputObjectType):
     id = graphene.ID()
     user_id = graphene.ID()
     test_id = graphene.ID()
-    start_time = graphene.String()
+    start_time = graphene.String(optional=True)
     end_time = graphene.String(optional=True)
     time_limit = graphene.Int(optional=True)
     score = graphene.Float(optional=True)
