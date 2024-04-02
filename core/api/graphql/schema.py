@@ -174,6 +174,10 @@ class Query(graphene.ObjectType):
         first=graphene.Int(),
         last=graphene.Int(),
         search=graphene.String(),
+        best=graphene.Int(),
+        worst=graphene.Int(),
+        userId=graphene.Int(),
+        testId=graphene.Int(),
     )
     user_responses = graphene.List(
         UserResponseType,
@@ -348,24 +352,47 @@ class Query(graphene.ObjectType):
         return answers
 
     def resolve_sessions(
-        self, info, id=None, first=None, last=None, search=None, **kwargs
+        self,
+        info,
+        id=None,
+        first=None,
+        last=None,
+        search=None,
+        best=None,
+        worst=None,
+        userId=None,
+        testId=None,
+        **kwargs
     ):
         sessions = Session.objects.all()
 
         if id:
             sessions = sessions.filter(id=id)
 
+        if userId:
+            sessions = sessions.filter(user_id=userId)
+
+        if testId:
+            sessions = sessions.filter(test_id=testId)
+
         if search:
             sessions = sessions.filter(
                 Q(user_id__icontains=search) | Q(test_id__icontains=search)
             )
 
-        if first:
+        if first and last is None:
             sessions = sessions[:first]
-        elif last:
+
+        if last and first is None:
             total_count = sessions.count()
             start_index = max(total_count - last, 0)
             sessions = sessions[start_index:]
+
+        if best and worst is None:
+            sessions = sessions.order_by("-score")[:best]
+
+        if worst and best is None:
+            sessions = sessions.order_by("score")[:worst]
 
         return sessions
 

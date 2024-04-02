@@ -64,6 +64,7 @@ class Test(models.Model):
     description = models.TextField(null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     questions = models.ManyToManyField("Question")
+    minutes_duration = models.IntegerField(default=2)  # Duration of the test in minutes
 
     def __str__(self):
         return self.title
@@ -112,13 +113,15 @@ class Answer(models.Model):
 
 
 class Session(models.Model):
-    """Model representing a session. A session is created when a user starts a test."""
+    """
+    Model representing a session.
+    A session is associated with a user, a test, and multiple user responses.
+    """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(null=True, blank=True)
-    time_limit = models.IntegerField(default=2)  # Time limit in minutes
     score = models.FloatField(default=0.0)
 
     def __str__(self):
@@ -130,8 +133,10 @@ class Session(models.Model):
             # Check if end_time has passed the current time
             return timezone.now() > self.end_time
 
-        # Calculate the expiration time based on start_time and time_limit
-        expiration_time = self.start_time + timezone.timedelta(minutes=self.time_limit)
+        # Calculate the expiration time based on start_time and test duration
+        expiration_time = self.start_time + timezone.timedelta(
+            minutes=self.test.minutes_duration
+        )
 
         # Check if current time is greater than expiration time
         if timezone.now() > expiration_time:
@@ -168,7 +173,9 @@ class UserResponse(models.Model):
 
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    chosen_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    chosen_answer = models.ForeignKey(
+        Answer, on_delete=models.SET_NULL, null=True, blank=True, default=None
+    )
 
     def __str__(self):
         return f"{self.session.user.username}'s response for {self.question.text}"
@@ -176,3 +183,4 @@ class UserResponse(models.Model):
     class Meta:
         db_table = "user_response"
         ordering = ["-session"]
+        unique_together = ["session", "question"]

@@ -59,7 +59,7 @@ class CreateUser(graphene.Mutation):
 
 class UpdateUser(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = UserInput(required=True)
 
     user = graphene.Field(UserType)
@@ -85,7 +85,7 @@ class UpdateUser(graphene.Mutation):
 
 class DeleteUser(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     user = graphene.Field(UserType)
 
@@ -114,7 +114,7 @@ class CreateIssuer(graphene.Mutation):
 
 class UpdateIssuer(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = IssuerInput(required=True)
 
     issuer = graphene.Field(IssuerType)
@@ -134,7 +134,7 @@ class UpdateIssuer(graphene.Mutation):
 
 class DeleteIssuer(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     issuer = graphene.Field(IssuerType)
 
@@ -163,7 +163,7 @@ class CreateIssuedYear(graphene.Mutation):
 
 class UpdateIssuedYear(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = IssuedYearInput(required=True)
 
     issued_year = graphene.Field(IssuedYearType)
@@ -181,7 +181,7 @@ class UpdateIssuedYear(graphene.Mutation):
 
 class DeleteIssuedYear(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     issued_year = graphene.Field(IssuedYearType)
 
@@ -210,7 +210,7 @@ class CreateSubject(graphene.Mutation):
 
 class UpdateSubject(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = SubjectInput(required=True)
 
     subject = graphene.Field(SubjectType)
@@ -228,7 +228,7 @@ class UpdateSubject(graphene.Mutation):
 
 class DeleteSubject(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     subject = graphene.Field(SubjectType)
 
@@ -257,7 +257,7 @@ class CreateTopic(graphene.Mutation):
 
 class UpdateTopic(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = TopicInput(required=True)
 
     topic = graphene.Field(TopicType)
@@ -275,7 +275,7 @@ class UpdateTopic(graphene.Mutation):
 
 class DeleteTopic(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     topic = graphene.Field(TopicType)
 
@@ -301,6 +301,7 @@ class CreateTest(graphene.Mutation):
             title=input.title,
             description=input.description,
             subject_id=input.subject_id,
+            minutes_duration=input.minutes_duration,
         )
         test_instance.save()
         test_instance.questions.set(input.question_ids)
@@ -310,7 +311,7 @@ class CreateTest(graphene.Mutation):
 
 class UpdateTest(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = TestInput(required=True)
 
     test = graphene.Field(TestType)
@@ -325,6 +326,8 @@ class UpdateTest(graphene.Mutation):
                 test_instance.description = input.description
             if input.subject_id:
                 test_instance.subject_id = input.subject_id
+            if input.minutes_duration:
+                test_instance.minutes_duration = input.minutes_duration
             if input.question_ids:
                 test_instance.questions.set(input.question_ids)
             test_instance.save()
@@ -334,7 +337,7 @@ class UpdateTest(graphene.Mutation):
 
 class DeleteTest(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     test = graphene.Field(TestType)
 
@@ -372,7 +375,7 @@ class CreateQuestion(graphene.Mutation):
 
 class UpdateQuestion(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = QuestionInput(required=True)
 
     question = graphene.Field(QuestionType)
@@ -402,7 +405,7 @@ class UpdateQuestion(graphene.Mutation):
 
 class DeleteQuestion(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     question = graphene.Field(QuestionType)
 
@@ -434,7 +437,7 @@ class CreateAnswer(graphene.Mutation):
 
 class UpdateAnswer(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = AnswerInput(required=True)
 
     answer = graphene.Field(AnswerType)
@@ -454,7 +457,7 @@ class UpdateAnswer(graphene.Mutation):
 
 class DeleteAnswer(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     answer = graphene.Field(AnswerType)
 
@@ -479,10 +482,6 @@ class CreateSession(graphene.Mutation):
         session_instance = Session(
             user_id=input.user_id,
             test_id=input.test_id,
-            start_time=input.start_time,
-            end_time=input.end_time,
-            time_limit=input.time_limit,
-            score=input.score,
         )
         session_instance.save()
         return CreateSession(session=session_instance)
@@ -490,7 +489,7 @@ class CreateSession(graphene.Mutation):
 
 class UpdateSession(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = SessionInput(required=True)
 
     session = graphene.Field(SessionType)
@@ -503,14 +502,8 @@ class UpdateSession(graphene.Mutation):
                 session_instance.user_id = input.user_id
             if input.test_id:
                 session_instance.test_id = input.test_id
-            if input.start_time:
-                session_instance.start_time = input.start_time
-            if input.end_time:
-                session_instance.end_time = input.end_time
             if input.time_limit:
                 session_instance.time_limit = input.time_limit
-            if input.score:
-                session_instance.score = input.score
             session_instance.save()
             return UpdateSession(session=session_instance)
         return UpdateSession(session=None)
@@ -518,7 +511,7 @@ class UpdateSession(graphene.Mutation):
 
 class DeleteSession(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     session = graphene.Field(SessionType)
 
@@ -551,7 +544,7 @@ class CreateUserResponse(graphene.Mutation):
 
 class UpdateUserResponse(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
         input = UserResponseInput(required=True)
 
     user_response = graphene.Field(UserResponseType)
@@ -573,7 +566,7 @@ class UpdateUserResponse(graphene.Mutation):
 
 class DeleteUserResponse(graphene.Mutation):
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
 
     user_response = graphene.Field(UserResponseType)
 

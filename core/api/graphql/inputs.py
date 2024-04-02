@@ -3,7 +3,7 @@ import graphene
 
 
 class UserInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     username = graphene.String()
     email = graphene.String()
     first_name = graphene.String()
@@ -12,63 +12,60 @@ class UserInput(graphene.InputObjectType):
 
 
 class IssuerInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     name = graphene.String()
     description = graphene.String(optional=True)
 
 
 class IssuedYearInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     year = graphene.Int()
 
 
 class SubjectInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     name = graphene.String()
 
 
 class TopicInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     name = graphene.String()
 
 
 class TestInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     title = graphene.String()
     description = graphene.String(optional=True)
-    subject_id = graphene.ID()
-    question_ids = graphene.List(graphene.ID)
+    subject_id = graphene.Int()
+    question_ids = graphene.List(graphene.Int)
+    minutes_duration = graphene.Int(default_value=2)
 
 
 class QuestionInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     text = graphene.String()
-    answer_ids = graphene.List(graphene.ID)
-    subject_id = graphene.ID()
-    topic_id = graphene.ID()
-    issuer_id = graphene.ID()
-    issuer_year_id = graphene.ID()
+    answer_ids = graphene.List(graphene.Int)
+    subject_id = graphene.Int()
+    topic_id = graphene.Int()
+    issuer_id = graphene.Int()
+    issuer_year_id = graphene.Int()
     difficulty = graphene.String(choices=["Easy", "Medium", "Hard"])
 
 
 class AnswerInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     text = graphene.String()
     is_correct = graphene.Boolean(default_value=False)
 
 
 class SessionInput(graphene.InputObjectType):
-    id = graphene.ID()
-    user_id = graphene.ID()
-    test_id = graphene.ID()
-    start_time = graphene.DateTime(default_value=datetime.now())
-    end_time = graphene.DateTime(optional=True, null=True)
-    time_limit = graphene.Int(default_value=2)
-    score = graphene.Float(default_value=0.0)
+    id = graphene.Int()
+    user_id = graphene.Int()
+    test_id = graphene.Int()
 
 
 class UserResponseInput(graphene.InputObjectType):
-    id = graphene.ID()
-    session_id = graphene.ID()
-    question_id = graphene.ID()
-    chosen_answer_id = graphene.ID()
+    id = graphene.Int()
+    session_id = graphene.Int()
+    question_id = graphene.Int()
+    chosen_answer_id = graphene.Int(nullable=True, optional=True, default_value=None)

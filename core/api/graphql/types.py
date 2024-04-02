@@ -63,14 +63,10 @@ class AnswerType(DjangoObjectType):
 
 
 class SessionType(DjangoObjectType):
-    is_expired = graphene.Boolean()
 
     class Meta:
         model = Session
         fields = "__all__"
-
-    def resolve_is_expired(self, info):
-        return self.is_expired()
 
 
 class UserResponseType(DjangoObjectType):

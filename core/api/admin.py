@@ -49,9 +49,21 @@ class TopicAdmin(admin.ModelAdmin):
 class TestAdmin(admin.ModelAdmin):
     """Custom admin panel settings for the Test model."""
 
-    list_display = ("title", "date_created", "subject", "description")
-    search_fields = ("title", "subject__name", "description", "date_created")
-    list_filter = ("date_created", "subject")
+    list_display = (
+        "title",
+        "date_created",
+        "subject",
+        "description",
+        "minutes_duration",
+    )
+    search_fields = (
+        "title",
+        "subject__name",
+        "description",
+        "date_created",
+        "minutes_duration",
+    )
+    list_filter = ("date_created", "subject", "minutes_duration")
 
 
 @admin.register(Question)
