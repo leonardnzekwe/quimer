@@ -106,9 +106,9 @@ export default function SignUp() {
     return null;
   } else {
     return (
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center text-white">
         <div className="bg-neutral-600 p-8 rounded shadow-md w-full max-w-md">
-          <Link href="/" className='left-0 text-white text-lg hover:text-amber-500'>Back 🏠</Link>
+          <Link href="/" className='left-0 text-lg hover:text-amber-500'>Back 🏠</Link>
           <h1 className="text-3xl text-center font-bold mb-3 text-neutral-100">Sign Up</h1>
           <p className='text-center text-sm mb-3'>Hey 👋, your buddy <span className='animate-pulse text-amber-500 text-lg'>Quimer 🤗</span> awaits you!</p>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -127,12 +127,12 @@ export default function SignUp() {
               </div>
             ))}
             {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
-            <button type="submit" className="w-full bg-amber-600 text-white py-2 px-4 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:ring-amber-500 focus:ring-opacity-50">Sign Up</button>
+            <button type="submit" className="w-full bg-amber-600 text-white py-2 px-4 rounded hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-white">Sign Up</button>
           </form>
           <p className="text-neutral-100 text-center mt-4">Already have an account?</p>
           <button
             onClick={() => signIn(undefined, { callbackUrl: '/dashboard' })}
-            className="bg-neutral-400 rounded-lg w-full py-2 px-4 mt-2 hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-amber-500 focus:ring-opacity-50"
+            className="bg-neutral-400 rounded-lg w-full py-2 px-4 mt-2 hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-white"
           >
             Sign In
           </button>

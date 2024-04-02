@@ -15,7 +15,7 @@ const PasswordChangeModal = () => {
   const [passwordChangeMessage, setPasswordChangeMessage] = useState('');
 
   // Set API URL
-  const passwordChangeUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/password/change/`;
+  const passwordChangeUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/password/change/`;
 
   // Ensure session access token is valid before making the API call
   const accessToken = session?.access || "no_token";
@@ -57,7 +57,7 @@ const PasswordChangeModal = () => {
 
   return (
     <div>
-      <button onClick={() => setIsChangePasswordModalOpen(true)} className="bg-neutral-500 hover:bg-amber-500 text-white px-4 py-2 rounded-md">
+      <button onClick={() => setIsChangePasswordModalOpen(true)} className="bg-neutral-500 hover:bg-amber-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-white">
         Change Password
       </button>
       {isChangePasswordModalOpen && (
@@ -77,10 +77,10 @@ const PasswordChangeModal = () => {
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             className="block mb-2 border border-gray-300 rounded-md px-2 py-1"
           />
-          <button onClick={handleChangePassword} className="bg-green-500 text-white px-3 py-1 rounded-md mr-2">
+          <button onClick={handleChangePassword} className="bg-green-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-green-600 hover: focus:outline-none focus:ring focus:ring-neutral-500">
             Submit
           </button>
-          <button onClick={() => setIsChangePasswordModalOpen(false)} className="bg-red-500 text-white px-3 py-1 rounded-md">
+          <button onClick={() => setIsChangePasswordModalOpen(false)} className="bg-neutral-500 text-white px-3 py-1 rounded-md hover:bg-neutral-600 focus:outline-none focus:ring focus:ring-amber-200">
             Cancel
           </button>
           <p className="text-red-500">{passwordChangeMessage}</p>

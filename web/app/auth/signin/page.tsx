@@ -94,7 +94,7 @@ export default function SignUp() {
     return null;
   } else {
     return (
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center text-white">
         <div className="bg-neutral-600 p-8 rounded shadow-md w-full max-w-md">
           <Link href="/" className='left-0 text-white text-lg hover:text-amber-500'>Back 🏠</Link>
           <h1 className="text-3xl text-center font-bold mb-3 text-neutral-100">Sign In</h1>
@@ -111,17 +111,17 @@ export default function SignUp() {
                   value={formData[field as keyof FormData]} // Use keyof FormData to ensure type safety
                   onChange={handleChange}
                   required
-                  className="text-black mt-1 w-full rounded-md border-amber-300 shadow-sm focus:border-amber-300 focus:ring focus:ring-amber-200 focus:ring-opacity-50"
+                  className="text-black mt-1 w-full rounded-md border-amber-300 shadow-sm ring-2 ring-amber-500 focus:ring-amber-500"
                 />
               </div>
             ))}
             {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
-            <button type="submit" className="w-full bg-amber-600 text-white py-2 px-4 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:ring-amber-500 focus:ring-opacity-50">Sign In</button>
+            <button type="submit" className="w-full bg-amber-600 py-2 px-4 rounded hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-white">Sign In</button>
           </form>
-          <p className="text-neutral-100 text-center mt-4">Don&apos;t have an account yet?</p>
+          <p className="text-center mt-4">Don&apos;t have an account yet?</p>
           <button
             onClick={() => { window.location.href = "/auth/signup"; }}
-            className="bg-neutral-400 rounded-lg w-full py-2 px-4 mt-2 hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-amber-500 focus:ring-opacity-50"
+            className="bg-neutral-500 rounded-lg w-full py-2 px-4 mt-2 hover:bg-amber-500 font-bold focus:outline-none focus:ring focus:ring-white"
           >
             Sign Up
           </button>

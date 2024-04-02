@@ -36,13 +36,13 @@ export default function SignOut() {
           <div className="flex justify-center space-x-4">
             <button
               onClick={() => signOut({ redirect: false })} // Call the signout function
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-500 focus:ring-opacity-50"
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-white"
             >
               Sign Out
             </button>
             <button
               onClick={() => router.back()} // Take user back to previous page
-              className="bg-neutral-500 text-white py-2 px-4 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50"
+              className="bg-neutral-500 text-white py-2 px-4 rounded hover:bg-amber-500 focus:outline-none focus:ring focus:ring-white"
             >
               Cancel
             </button>

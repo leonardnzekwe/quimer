@@ -100,9 +100,9 @@ export default function Dashboard() {
                 <p className="capitalize text-lg text-white">Hello {session.user.username || 'boss'},</p>
               </div>
               <div className="flex items-center space-x-4">
-                <Link href="/" className='px-4 py-2 bg-neutral-500 text-white rounded-lg hover:bg-amber-500'>Home</Link>
+                <Link href="/" className='px-4 py-2 bg-neutral-500 text-white rounded-lg hover:bg-amber-500 focus:outline-none focus:ring focus:ring-white'>Home</Link>
                 <PasswordChangeModal />
-                <button onClick={() => { window.location.href = "/auth/signout"; }} className="px-4 py-2 bg-neutral-500 text-white rounded-lg hover:bg-amber-500">
+                <button onClick={() => { window.location.href = "/auth/signout"; }} className="px-4 py-2 bg-neutral-500 text-white rounded-lg hover:bg-amber-500 focus:outline-none focus:ring focus:ring-white">
                   Sign out
                 </button>
               </div>
@@ -135,7 +135,7 @@ export default function Dashboard() {
                         <p className="text-center text-lg mb-2">Start Time: {formatDate(session.startTime)}</p>
                         <p className="text-center text-lg mb-2">End Time: {formatDate(session.endTime)}</p>
                         <p className="text-center text-lg mb-2">Duration: {session.test.minutesDuration} Minutes</p>
-                        <p className="text-center text-lg mb-2">Score: {session.score}</p>
+                        <p className="text-center text-lg mb-2">Score: {session.score.toFixed(2)}%</p>
                       </div>
                     ))
                   ))}
@@ -194,7 +194,7 @@ export default function Dashboard() {
                       <p className="text-center text-lg mb-2">Title: {test.title}</p>
                       <p className="text-center text-lg mb-2">Description: {test.description}</p>
                       <p className="text-center text-lg mb-2">Subject: {test.subject.name}</p>
-                      <p className="text-center text-lg mb-2">Date Created: {test.dateCreated}</p>
+                      <p className="text-center text-lg mb-2">Date Created: {formatDate(test.dateCreated)}</p>
                       <p className="text-center text-lg mb-2">Duration: {test.minutesDuration} minutes</p>
                     </div>
                   ))}

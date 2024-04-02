@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function Home() {
 
   return (
-    <div>
+    <div className='text-white'>
       {/* Header Section */}
       <div className='relative'>
         <Image

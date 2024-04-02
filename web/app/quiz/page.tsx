@@ -9,10 +9,15 @@ import { useSession } from 'next-auth/react';
 import DefaultLoader from '@/components/skeleton_loader';
 import Link from 'next/link';
 import { formatTimeFromMilliseconds, formatDate } from '@/lib/utility_functions';
+import { useRouter } from 'next/navigation';
+
 
 export default function QuizPage() {
     // Retrieve user session and status
     const { data: session, status } = useSession({ required: true });
+
+    // Use Router
+    const router = useRouter();
 
     // Get test_id from query string only if window is defined (client-side)
     const queryString = typeof window !== 'undefined' ? window.location.search : '';
@@ -280,13 +285,23 @@ export default function QuizPage() {
 
                 {/* Display session score after submission */}
                 {sessionScoreData !== null && quizEnded === true && (
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center h-screen">
                         <h2 className="text-2xl font-bold mb-4">Quiz has Ended 💪</h2>
                         <p className="text-sm mb-4">Hey buddy👋, big congrats 🎊 from <span className='animate-pulse text-amber-500 text-lg'>Quimer 🤗</span> on completing the quiz.</p>
                         <p className='font bold mb-4'>Your scored <span className='underline underline-offset-8'>{sessionScoreData?.sessions[0]?.score.toFixed(2)}%</span> in the just concluded session test.</p>
-                        <Link href="/dashboard" className="bg-neutral-500 rounded-lg hover:bg-amber-500 p-3">
+                        <button
+                            onClick={() => {
+                                if (typeof window !== 'undefined') {
+                                    // Navigate to the dashboard page
+                                    window.location.href = '/dashboard';
+                                } else {
+                                    // Redirect to the dashboard page
+                                    router.push('/dashboard');
+                                }
+                            }}
+                            className="bg-neutral-500 rounded-lg hover:bg-amber-500 p-3">
                             Return to Dashboard, Good luck! 🍀
-                        </Link>
+                        </button>
                     </div>
                 )}
             </div>
