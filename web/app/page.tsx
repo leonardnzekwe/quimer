@@ -44,7 +44,7 @@ export default function Home() {
         {/* Demo Video Section */}
         <div className="relative w-full p-4 pb-[52.8125%]">
           <iframe
-            src="https://www.loom.com/embed/1ec9d169ebc84533aa0ae9bfec13c741?sid=f6d40414-29e5-4455-ad32-c1442a3dbda3?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+            src="https://www.loom.com/embed/0d5001529c904d848af3174f780683c3?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
             allowFullScreen
             className="absolute top-0 left-0 w-full h-full"
           ></iframe>
@@ -61,15 +61,15 @@ export default function Home() {
             </p>
             <p className='text-center'>Here are some of the limitation:</p>
             <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mt-2 text-center'>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Lack of Adaptive Testing Environment</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Inadequate Security Measures</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Complex User Interface</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Limited Performance Analytics</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Delayed Feedback System</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Non-Scalable for Educational Institutions</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Fixed Test Formats</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Restricted Platform Compatibility</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Difficult Integration with Learning Management Systems</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Lack of Adaptive Testing Environment</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Inadequate Security Measures</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Complex User Interface</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Limited Performance Analytics</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Delayed Feedback System</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Non-Scalable for Educational Institutions</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Fixed Test Formats</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Restricted Platform Compatibility</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Difficult Integration with Learning Management Systems</p>
             </div>
             <p className='p-4 m-4'>
               These limitation is what we hope to solve,
@@ -83,15 +83,15 @@ export default function Home() {
           <p className='text-center font-bold'>Features</p>
           <div className='bg-neutral-500 rounded-lg m-4 p-4 font-bold'>
             <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mt-2 text-center'>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Adaptive Testing Environment</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Robust Security Measures</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Intuitive User Interface</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Comprehensive Performance Analytics</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Instant Feedback System</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Scalable Solution for Educational Institutions</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Customizable Test Creation</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Multi-platform Compatibility</p>
-              <p className='bg-neutral-600 p-2 rounded-lg'>Seamless Integration with Learning Management Systems</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Adaptive Testing Environment</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Robust Security Measures</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Intuitive User Interface</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Comprehensive Performance Analytics</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Instant Feedback System</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Scalable Solution for Educational Institutions</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Customizable Test Creation</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Multi-platform Compatibility</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Seamless Integration with Learning Management Systems</p>
             </div>
           </div>
         </div>
@@ -100,11 +100,11 @@ export default function Home() {
           <div className='bg-neutral-500 rounded-lg m-4 p-4 font-bold'>
             <p className='text-center'>
               Built as Final Portfolio Project for
-              <Link href='https://holbertonschool.com' target='_blank' rel='noopener noreferrer' className='text-gray-800 hover:text-amber-500'> Holberton School</Link>
+              <Link href='https://holbertonschool.com' target='_blank' rel='noopener noreferrer' className='text-black hover:text-amber-500'> Holberton School</Link>
             </p>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-2 text-center'>
-              <div className='bg-neutral-600 p-2 rounded-lg'>
-                <p className='text-gray-800'>Rahmat Folorunsho</p>
+              <div className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>
+                <p className='text-amber-500'>Rahmat Folorunsho</p>
                 <p>UI/UX/Graphics, Frontend</p>
                 <div className='flex- flex-col items-center justify-center space-x-2'>
                   <Link href='https://github.com/rahma-cloud' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>Github</Link>
@@ -112,8 +112,8 @@ export default function Home() {
                   <Link href='https://www.linkedin.com/in/rahmat-folorunsho-873256189' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>LinkedIn</Link>
                 </div>
               </div>
-              <div className='bg-neutral-600 p-2 rounded-lg'>
-                <p className='text-gray-800'>Ifeanyi Akamigbo</p>
+              <div className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>
+                <p className='text-amber-500'>Ifeanyi Akamigbo</p>
                 <p>Frontend, Backend</p>
                 <div className='flex- flex-col items-center justify-center space-x-2'>
                   <Link href='https://github.com/valentine1244' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>Github</Link>
@@ -121,8 +121,8 @@ export default function Home() {
                   <Link href='https://www.linkedin.com/in/ifeanyi-akamigbo-9678ba192' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>LinkedIn</Link>
                 </div>
               </div>
-              <div className='bg-neutral-600 p-2 rounded-lg'>
-                <p className='text-gray-800'>Leonard Nzekwe</p>
+              <div className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>
+                <p className='text-amber-500'>Leonard Nzekwe</p>
                 <p>Backend, DevOps</p>
                 <div className='flex- flex-col items-center justify-center space-x-2'>
                   <Link href='https://github.com/leonardnzekwe' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>Github</Link>
@@ -135,12 +135,13 @@ export default function Home() {
         </div>
       </div>
       {/* Footer Section */}
-      <div className='sticky bottom-0 bg-neutral-500 p-2 my-4 mx-auto w-fit rounded-lg font-bold'>
-        <div className='flex flex-row items-center justify-center space-x-5'>
-          <Link href='https://github.com/leonardnzekwe/quimer.git' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>Github Repo</Link>
-          <Link href={process.env.NEXT_PUBLIC_BACKEND_URL || ''} target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>API Core</Link>
-          <Link href='https://docs.netrobase.dev/quimer-docs' target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>Rest API Docs</Link>
-          <Link href={`${process.env.NEXT_PUBLIC_BACKEND_URL}graphql/` || ''} target='_blank' rel='noopener noreferrer' className='hover:text-amber-500'>GraphQL Playground</Link>
+      <div className='sticky bottom-0 bg-neutral-500 p-2 my-4 mx-auto w-fit rounded-lg font-bold text-sm'>
+        <div className='flex flex-row items-center justify-center space-x-2'>
+          <Link href='https://github.com/leonardnzekwe/quimer.git' target='_blank' rel='noopener noreferrer' className='hover:bg-amber-600 bg-neutral-600 p-1 rounded-lg'>Github Repo</Link>
+          <Link href='https://www.loom.com/share/0d5001529c904d848af3174f780683c3' target='_blank' rel='noopener noreferrer' className='hover:bg-amber-600 bg-neutral-600 p-1 rounded-lg'>Demo Video</Link>
+          <Link href={process.env.NEXT_PUBLIC_BACKEND_URL || ''} target='_blank' rel='noopener noreferrer' className='hover:bg-amber-500 bg-neutral-600 p-1 rounded-lg'>API Core</Link>
+          <Link href='https://docs.netrobase.dev/quimer-docs' target='_blank' rel='noopener noreferrer' className='hover:bg-amber-600 bg-neutral-600 p-1 rounded-lg'>Rest API Docs</Link>
+          <Link href={`${process.env.NEXT_PUBLIC_BACKEND_URL}graphql/` || ''} target='_blank' rel='noopener noreferrer' className='hover:bg-amber-600 bg-neutral-600 p-1 rounded-lg'>GraphQL Playground</Link>
         </div>
       </div>
       <Link href='#home' className='fixed bottom-0 right-0 m-4 hover:text-amber-500'>Back to Top</Link>

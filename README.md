@@ -11,11 +11,11 @@ Quimer has the following features:
 
 - User Authentication: Users can sign up, login and logout of the platform.
 - User Profile: Users can view and update their profile.
-- Test Creation: Users can create custom tests by selecting the number of questions, the subject and the difficulty level.
+- Test Creation: Users can create custom tests questions and answers as issuers.
 - Test Taking: Users can take tests and view their scores.
-- Test History: Users can view their test history.
+- Test History: Users can view their test history and performance metrics.
 - Exam Prep: Users can prep for external exams like JAMB, WAEC or NECO using the exam bodies past questions.
-- Admin Dashboard: Admins can view all users, tests and test results.
+- Admin Dashboard: Admins can view, create, update and delete all users, tests and test results.
 
 
 # Installation and Usage
@@ -41,7 +41,7 @@ The Lafia HMS was built as team by:
 - [Leonard Nzekwe](https://github.com/leonardnzekwe) - Backend/DevOps
 
 # Technology
-We strived to follow the industry best standards. So we seperated our backend logic from our front end logic. We exposed the data via API endpoints, which is consumed by the frontend through making a http request to the endpoints.
+We strived to follow the industry best standards. So we separated our backend logic from our front end logic. We exposed the data via Graphql and Rest API. We used the following technologies to build the project:
 
 - Backend (API):
 - - Language: Python
@@ -58,7 +58,7 @@ We strived to follow the industry best standards. So we seperated our backend lo
 - - HTTP Client: Axios
 - - GraphQL Client: Apollo Client
 - UI/UX (Design):
-- - Tool: Figma
+- - Tool: Canva
 - Hosting Platforms:
 - - Frontend & Backend - Vercel
 - - Database - Neon Postgres
@@ -66,7 +66,7 @@ We strived to follow the industry best standards. So we seperated our backend lo
 
 # Architecture
 
-Quimer Architecture is a simple monolithic architecture that is divided into two main parts: the backend and the frontend. The backend is built with Django, Django Rest Framework and Django Graphene Graphql Server, while the frontend is built with Nextjs. The frontend consumes the backend API endpoints to display the data to the user. For authentication it uses the rest api and for all other data quering and mutations it uses the graphql api.
+Quimer Architecture is a simple monolithic architecture that is divided into two main parts: the backend and the frontend. The backend is built with Django, Django Rest Framework and Django Graphene Graphql Server, while the frontend is built with Nextjs, Next Auth and Apollo Client. The frontend consumes the backend API endpoints to display the data to the user. For authentication it uses the rest api and for all other data querying and mutations it uses the graphql api. The quimer codebase is a monorepo.
 
 ![Quimer Architecture](assets/quimer_infra.png)
 

@@ -1,8 +1,7 @@
-// @/app/components/password_change.tsx
-
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import axios from 'axios';
 import { useSession, signOut } from "next-auth/react";
+import { SubmissionLoader } from './skeleton_loader';
 
 
 const PasswordChangeModal = () => {
@@ -12,7 +11,8 @@ const PasswordChangeModal = () => {
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [passwordChangeMessage, setPasswordChangeMessage] = useState('');
+  const [passwordChangeMessage, setPasswordChangeMessage] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Set API URL
   const passwordChangeUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/password/change/`;
@@ -20,11 +20,15 @@ const PasswordChangeModal = () => {
   // Ensure session access token is valid before making the API call
   const accessToken = session?.access || "no_token";
 
-  const handleChangePassword = async () => {
+  const handleChangePassword = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
     try {
+      setIsSubmitting(true); // Set loading state to true when submission starts
+
       // Perform validation for new passwords
-      if (newPassword !== confirmNewPassword) {
-        setPasswordChangeMessage('Passwords do not match.');
+      if (!newPassword || !confirmNewPassword) {
+        setPasswordChangeMessage("The password fields can't be empty.");
         return;
       }
 
@@ -40,18 +44,26 @@ const PasswordChangeModal = () => {
       // Show Success Message
       setPasswordChangeMessage(response.data.detail);
 
-      // Log out the user after a delay (e.g., 3 seconds)
+      // Log out the user after a delay (e.g., 2 seconds)
       // following successful password change
       setTimeout(async () => {
         // Close the modal after successful password change
         setIsChangePasswordModalOpen(false);
 
-        await signOut({ callbackUrl: '/dashboard' });
-      }, 3000); // 3 seconds delay before signing out
+        await signOut({ redirect: false, callbackUrl: '/dashboard' });
+      }, 2000); // 2 seconds delay before signing out
     } catch (error: any) {
-      // Handle errors
-      setPasswordChangeMessage("Failed to change password");
-      console.log(error)
+      // Handle error if user creation fails
+      if (error.response && error.response.data) {
+        // If the API returns an error array, concatenate the error messages into a single string
+        const errorMessage = Object.values(error.response.data).join(' ');
+        setPasswordChangeMessage(errorMessage);
+      } else {
+        setPasswordChangeMessage("Failed to change password");
+      }
+      console.log('Password change failed:', error);
+    } finally {
+      setIsSubmitting(false); // Set loading state to false when submission finishes (success or failure)
     }
   };
 
@@ -61,31 +73,48 @@ const PasswordChangeModal = () => {
         Change Password
       </button>
       {isChangePasswordModalOpen && (
-        <div className="absolute top-0 right-0 bg-white text-black p-4 shadow-lg rounded-lg">
-          {/* Modal for changing password */}
-          <input
-            type="text"
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="block mb-2 border border-gray-300 rounded-md px-2 py-1"
-          />
-          <input
-            type="text"
-            placeholder="Confirm New Password"
-            value={confirmNewPassword}
-            onChange={(e) => setConfirmNewPassword(e.target.value)}
-            className="block mb-2 border border-gray-300 rounded-md px-2 py-1"
-          />
-          <button onClick={handleChangePassword} className="bg-green-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-green-600 hover: focus:outline-none focus:ring focus:ring-neutral-500">
-            Submit
-          </button>
-          <button onClick={() => setIsChangePasswordModalOpen(false)} className="bg-neutral-500 text-white px-3 py-1 rounded-md hover:bg-neutral-600 focus:outline-none focus:ring focus:ring-amber-200">
-            Cancel
-          </button>
-          <p className="text-red-500">{passwordChangeMessage}</p>
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+          <div className="bg-neutral-300 p-4 shadow-lg rounded-lg max-w-md w-full">
+            {/* Modal content */}
+            <h2 className="text-lg font-semibold text-black text-center mb-2">Change Password</h2>
+            <form onSubmit={handleChangePassword} className="space-y-4">
+              <input
+                type="password"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                className="text-black block mb-2 border border-gray-300 rounded-md px-2 py-1 w-full"
+              />
+              <input
+                type="password"
+                placeholder="Confirm New Password"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                required
+                className="text-black block mb-2 border border-gray-300 rounded-md px-2 py-1 w-full"
+              />
+              <p className="text-red-500 mt-3 text-center">{passwordChangeMessage}</p>
+              <div className='flex flex-row justify-center mt-3'>
+                <button type="submit" className="bg-green-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-green-600 focus:outline-none focus:ring focus:ring-neutral-500">
+                  Submit
+                </button>
+                <button
+                  onClick={() => {
+                    setIsChangePasswordModalOpen(false);
+                    setPasswordChangeMessage('');
+                  }}
+                  type="button"
+                  className="bg-neutral-500 text-white px-3 py-1 rounded-md hover:bg-neutral-600 focus:outline-none focus:ring focus:ring-amber-200">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
+      {/* Show loader when submitting data */}
+      {isSubmitting && (<SubmissionLoader />)}
     </div>
   );
 };
