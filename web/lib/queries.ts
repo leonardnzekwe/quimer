@@ -7,9 +7,9 @@ query GET_USER_DASHBOARD_DATA($id: Int) {
     username
     sessionSet { 
       id
-      test { id,  title, description }
+      test { id,  title, description, minutesDuration, subject { id name } }
       startTime
-      timeLimit
+      endTime
       score  
     }
   },
@@ -23,6 +23,7 @@ query GET_USER_DASHBOARD_DATA($id: Int) {
     title
     dateCreated
     description
+    minutesDuration
     subject { id name }
   },
   subjects {
@@ -32,3 +33,11 @@ query GET_USER_DASHBOARD_DATA($id: Int) {
 }
 `;
 
+export const GET_SESSION_SCORE_QUERY = gql`
+query GET_SESSION_SCORE_QUERY($id: Int) {
+  sessions(id: $id) {
+    id
+    score
+  }
+}
+`;

@@ -8,8 +8,9 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { useQuery } from '@apollo/client';
 import { FETCH_USER_DASHBOARD_DATA } from "@/lib/queries";
-import { User, Session, Issuer, Subject, Test } from "@/lib/types";
+import { User, QuizSession, Issuer, Subject, Test } from "@/lib/types";
 import { useState } from "react";
+import { formatDate } from "@/lib/utility_functions";
 
 // Define the Dashboard component
 export default function Dashboard() {
@@ -126,12 +127,14 @@ export default function Dashboard() {
                 <p className="capitalize text-center text-lg mb-4">Session Test Scores:</p>
                 <div className=" bg-neutral-900 rounded-lg w-fit p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {data.users.map((user: User) => (
-                    user.sessionSet.map((session: Session) => (
+                    user.sessionSet.map((session: QuizSession) => (
                       <div key={session.id} className="bg-neutral-800 rounded-lg p-4">
                         <p className="text-center text-lg mb-2">Title: {session.test.title}</p>
                         <p className="text-center text-lg mb-2">Description: {session.test.description}</p>
-                        <p className="text-center text-lg mb-2">Start Time: {session.startTime}</p>
-                        <p className="text-center text-lg mb-2">Time Limit: {session.timeLimit} Minutes</p>
+                        <p className="text-center text-lg mb-2">Subject: {session.test.subject.name}</p>
+                        <p className="text-center text-lg mb-2">Start Time: {formatDate(session.startTime)}</p>
+                        <p className="text-center text-lg mb-2">End Time: {formatDate(session.endTime)}</p>
+                        <p className="text-center text-lg mb-2">Duration: {session.test.minutesDuration} Minutes</p>
                         <p className="text-center text-lg mb-2">Score: {session.score}</p>
                       </div>
                     ))
@@ -192,6 +195,7 @@ export default function Dashboard() {
                       <p className="text-center text-lg mb-2">Description: {test.description}</p>
                       <p className="text-center text-lg mb-2">Subject: {test.subject.name}</p>
                       <p className="text-center text-lg mb-2">Date Created: {test.dateCreated}</p>
+                      <p className="text-center text-lg mb-2">Duration: {test.minutesDuration} minutes</p>
                     </div>
                   ))}
                 </div>
@@ -199,6 +203,30 @@ export default function Dashboard() {
             ) : showTests ? (
               <div className="flex flex-col items-center mt-10">
                 <p className="capitalize text-center text-lg mb-4">No Tests Available</p>
+              </div>
+            ) : null}
+
+            {/* Display Quiz Tests */}
+            {showQuiz && data.tests && data.tests.length > 0 ? (
+              <div className="flex flex-col items-center mt-10">
+                <p className="text-center text-lg mb-4">Choose any of the Tests to take its Quiz:</p>
+                <div className=" bg-neutral-900 rounded-lg w-fit p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {data.tests.map((test: Test) => (
+                    <Link
+                      href={`/quiz?test_id=${test.id}`}
+                      key={test.id} className="bg-neutral-800 rounded-lg p-4 hover:bg-amber-500">
+                      <p className="text-center text-lg mb-2">Title: {test.title}</p>
+                      <p className="text-center text-lg mb-2">Description: {test.description}</p>
+                      <p className="text-center text-lg mb-2">Subject: {test.subject.name}</p>
+                      <p className="text-center text-lg mb-2">Date Created: {formatDate(test.dateCreated)}</p>
+                      <p className="text-center text-lg mb-2">Duration: {test.minutesDuration} minutes</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : showQuiz ? (
+              <div className="flex flex-col items-center mt-10">
+                <p className="capitalize text-center text-lg mb-4">No Quiz Tests Available</p>
               </div>
             ) : null}
 

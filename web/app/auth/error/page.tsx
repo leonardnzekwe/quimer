@@ -1,16 +1,12 @@
 'use client'
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 export default function Error() {
-  // Get a copy of the search parameters
-  const searchParams = useSearchParams()
-
-  // Get the Query/Search Parameters
-  const errorParam = searchParams.get('error');
-
-  // Ensure parameters are parsed to numbers correctly
+  // Get error from query string only if window is defined (client-side)
+  const queryString = typeof window !== 'undefined' ? window.location.search : '';
+  const urlParams = new URLSearchParams(queryString);
+  const errorParam = urlParams.get('error');
   const error = errorParam ? errorParam : 'Unknown Error';
 
   // Function to get error message based on error code

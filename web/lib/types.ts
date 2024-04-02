@@ -26,6 +26,7 @@ export interface Test {
   description: string | null;
   subject: Subject;
   questions: Question[];
+  minutesDuration: number;
 }
 
 export interface Question {
@@ -45,26 +46,28 @@ export interface Answer {
   is_correct: boolean;
 }
 
-export interface Session {
+export interface QuizSession {
   id: number;
   user: User;
   test: Test;
   startTime: string; // This should be a string representing a date-time format
-  endTime: string | null; // This should be a string representing a date-time format or null
-  timeLimit: number;
+  endTime: string, // This should be a string representing a date-time format
   score: number;
 }
 
 export interface User {
   id: number;
   username: string;
-  sessionSet: Session[];
-  // Add other user properties as needed
+  sessionSet: QuizSession[];
 }
 
 export interface UserResponse {
   id: number;
-  session: Session;
+  session: QuizSession;
   question: Question;
-  chosen_answer: Answer;
+  chosenAnswer: Answer;
+}
+
+export interface QuizSessionQueryData {
+  sessions: QuizSession[];
 }

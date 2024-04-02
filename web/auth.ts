@@ -79,7 +79,7 @@ export const authOptions: NextAuthOptions = {
       if (getCurrentEpochTime() > token["ref"]) {
         const response = await axios({
           method: "post",
-          url: process.env.NEXTAUTH_BACKEND_URL + "auth/token/refresh/",
+          url: process.env.NEXTAUTH_BACKEND_URL + "api/auth/token/refresh/",
           data: {
             refresh: token["refresh"], // refresh token
           },

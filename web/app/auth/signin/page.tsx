@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import DefaultLoader, { SubmissionLoader } from '@/components/skeleton_loader';
@@ -18,13 +18,10 @@ export default function SignUp() {
   // Use Router
   const router = useRouter();
 
-  // Get a copy of the search parameters
-  const searchParams = useSearchParams()
-
-  // Get the Query/Search Parameters
-  const callbackUrlParam = searchParams.get('callbackUrl');
-
-  // Ensure parameters are parsed to numbers correctly
+  // Get test_id from query string only if window is defined (client-side)
+  const queryString = typeof window !== 'undefined' ? window.location.search : '';
+  const urlParams = new URLSearchParams(queryString);
+  const callbackUrlParam = urlParams.get('callbackUrl');
   const callbackUrlString = callbackUrlParam ? callbackUrlParam : '/dashboard';
 
   // Loading state for submission
@@ -114,7 +111,7 @@ export default function SignUp() {
                   value={formData[field as keyof FormData]} // Use keyof FormData to ensure type safety
                   onChange={handleChange}
                   required
-                  className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-300 focus:ring focus:ring-amber-200 focus:ring-opacity-50"
+                  className="text-black mt-1 w-full rounded-md border-amber-300 shadow-sm focus:border-amber-300 focus:ring focus:ring-amber-200 focus:ring-opacity-50"
                 />
               </div>
             ))}
