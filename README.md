@@ -68,11 +68,19 @@ We strived to follow the industry best standards. So we separated our backend lo
 
 Quimer Architecture is a simple monolithic architecture that is divided into two main parts: the backend and the frontend. The backend is built with Django, Django Rest Framework and Django Graphene Graphql Server, while the frontend is built with Nextjs, Next Auth and Apollo Client. The frontend consumes the backend API endpoints to display the data to the user. For authentication it uses the rest api and for all other data querying and mutations it uses the graphql api. The quimer codebase is a monorepo.
 
-![Quimer Architecture](assets/quimer_infra.png)
+# Infrastructure
+
+![Quimer Infrastructure](assets/quimer_infra.png)
+
+# Data Model
+
+![Quimer Data Model](assets/quimer_data_model.png)
 
 # API Documentation
 
-- Rest API Documentation can be found at [docs.netrobase.dev/quimer-docs](https://docs.netrobase.dev/quimer-docs)
+- Rest API Documentation can be found:
+- - Gitbook: [docs.netrobase.dev/quimer-docs](https://docs.netrobase.dev/quimer-docs)
+- - Repo API Directory: [core/README.md](core/README.md)
 
 - GraphQL API Doc and Playground can be found at [quimer-api.vercel.app/graphql](https://quimer-api.vercel.app/api/graphql)
 

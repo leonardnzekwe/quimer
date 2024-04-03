@@ -53,23 +53,26 @@ export default function Home() {
           <div className='text-center mt-4 font-bold'>About Project</div>
           <div className='bg-neutral-500 rounded-lg m-4 p-4 font-bold'>
             <p className='p-4 m-4'>
-              Quimer is a comprehensive computer-based testing system designed to
-              enhance the assessment process in educational institutions.
-              It addresses the limitations of traditional testing methods by
-              providing a secure, efficient, and user-friendly platform for
-              both educators and students.
+              Quimer is a CBT (Computer Based Test) System that allows users
+              to create and take custom tests and equally prep for external exams
+              like JAMB, WAEC or NECO using the exam bodies past questions.
+              It is aimed at solving most of the limitations attached to the
+              traditional paper-based test system and also the existing CBT systems.
             </p>
             <p className='text-center'>Here are some of the limitation:</p>
             <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mt-2 text-center'>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Lack of Adaptive Testing Environment</p>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Inadequate Security Measures</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Complex User Interface</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Limited Performance Analytics</p>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Delayed Feedback System</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Non-Scalable for Educational Institutions</p>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Fixed Test Formats</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Restricted Platform Compatibility</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Difficult Integration with Learning Management Systems</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Limited Test Accessibility</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>High Cost of Printing and Distribution</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Risk of Loss or Damage to Test Materials</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Inefficient Test Administration and Grading</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Limited Test Security and Prevention of Cheating</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Inflexibility in Test Format and Structure</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Difficulty in Test Result Analysis and Reporting</p>
             </div>
             <p className='p-4 m-4'>
               These limitation is what we hope to solve,
@@ -83,15 +86,15 @@ export default function Home() {
           <p className='text-center font-bold'>Features</p>
           <div className='bg-neutral-500 rounded-lg m-4 p-4 font-bold'>
             <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mt-2 text-center'>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Adaptive Testing Environment</p>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Robust Security Measures</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Intuitive User Interface</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Comprehensive Performance Analytics</p>
-              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Instant Feedback System</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Scalable Solution for Educational Institutions</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Customizable Test Creation</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Multi-platform Compatibility</p>
               <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Seamless Integration with Learning Management Systems</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Automated Test Grading</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Unlimited Test Accessibility</p>
+              <p className='bg-neutral-600 p-2 rounded-lg hover:animate-pulse'>Efficient Test Administration and Grading</p>
             </div>
           </div>
         </div>
